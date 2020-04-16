@@ -20,8 +20,10 @@ def download_stock(stock):
 if __name__ == '__main__':
 
 	""" set the download window """
-	now_time = datetime.now()
-	start_time = datetime(now_time.year - 5, now_time.month , now_time.day)
+	# now_time = datetime.now()
+	now_time = datetime(2019, 12, 31)
+	# start_time = datetime(now_time.year - 5, now_time.month , now_time.day)
+	start_time = datetime(2015, 1, 1)
 
 	""" list of s_anp_p companies """
 	s_and_p = ['MMM','ABT','ABBV','ACN','ATVI','AYI','ADBE','AMD','AAP','AES','AET',
@@ -63,11 +65,11 @@ if __name__ == '__main__':
 		'UTX','UHS','UNM','VFC','VLO','VAR','VTR','VRSN','VRSK','VZ','VRTX','VIAB','V','VNO',
 		'VMC','WMT','WBA','DIS','WM','WAT','WEC','WFC','HCN','WDC','WU','WRK','WY','WHR','WMB',
 		'WLTW','WYN','WYNN','XEL','XRX','XLNX','XL','XYL','YUM','ZBH','ZION','ZTS']
-		
+
 	bad_names =[] #to keep track of failed queries
 
 	"""here we use the concurrent.futures module's ThreadPoolExecutor
-		to speed up the downloads buy doing them in parallel 
+		to speed up the downloads buy doing them in parallel
 		as opposed to sequentially """
 
 	#set the maximum thread number
@@ -77,7 +79,7 @@ if __name__ == '__main__':
 	with futures.ThreadPoolExecutor(workers) as executor:
 		res = executor.map(download_stock, s_and_p)
 
-	
+
 	""" Save failed queries to a text file to retry """
 	if len(bad_names) > 0:
 		with open('failed_queries.txt','w') as outfile:

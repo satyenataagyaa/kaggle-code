@@ -8,3 +8,4 @@ google_analytics/X_train.csv
 *.csv
 *.zip
 *.dat
+.DS_Store
